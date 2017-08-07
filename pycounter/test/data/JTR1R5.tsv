@@ -1,0 +1,74 @@
+Report_Name	Journal Title Report 1																							
+Report_ID	JTR1																							
+Release	5																							
+Report_Description	Usage by Month and Journal																							
+Institution_Name	Sample University																							
+Institution_ID	isni=1234567890																							
+Metric_Types	total_investigations; total_requests; unique_item_investigations; unique_title_investigations; unique_title_investigations; unique_title_requests																							
+Report_Filters	Access_Type=OA_Delayed; Access_Type=Controlled|OA_Delayed|OA_Gold_APC|OA_Gold_Non_APC|Other_Free_to_Read; Access_Method=Regular																							
+Report_Attributes																								
+Exceptions																								
+Reporting_Period	BeginDate=2016-01-01; EndDate=2016-12-31																							
+Created	2017-01-05																							
+																								
+Title	Publisher	Publisher_ID	Platform	DOI	Proprietary_ID	Print_ISSN	Online_ISSN	Data_Type	Access_Type	Is_Archive	Metric_Type	Reporting_Period_Total	Jan-2015	Feb-2015	Mar-2015	Apr-2015	May-2015	Jun-2015	Jul-2015	Aug-2015	Sep-2015	Oct-2015	Nov-2015	Dec-2015
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Controlled	N	total_investigations	10	2	2	2	2	2							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Controlled	N	total_requests	8	1	2	0	2	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Controlled	N	unique_item_investigations	5	1	2	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Controlled	N	unique_item_requests	4	1	1	0	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Controlled	N	unique_title_investigations	3	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Controlled	N	unique_title_requests	2	1	1	0	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Controlled	Y	total_investigations	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Controlled	Y	total_requests	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Controlled	Y	unique_item_investigations	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Controlled	Y	unique_item_requests	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Controlled	Y	unique_title_investigations	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Controlled	Y	unique_title_requests	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	OA_Delayed	N	total_investigations	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	OA_Delayed	N	total_requests	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	OA_Delayed	N	unique_item_investigations	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	OA_Delayed	N	unique_item_requests	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	OA_Delayed	N	unique_title_investigations	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	OA_Delayed	N	unique_title_requests	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	OA_Gold_APC	N	total_investigations	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	OA_Gold_APC	N	total_requests	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	OA_Gold_APC	N	unique_item_investigations	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	OA_Gold_APC	N	unique_item_requests	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	OA_Gold_APC	N	unique_title_investigations	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	OA_Gold_APC	N	unique_title_requests	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Other_Free_to_Read	N	total_investigations	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Other_Free_to_Read	N	total_requests	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Other_Free_to_Read	N	unique_item_investigations	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Other_Free_to_Read	N	unique_item_requests	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Other_Free_to_Read	N	unique_title_investigations	5	1	1	1	1	1							
+Journal A	Publisher B	isni:222222	PlatformZ		jnrlA	1111-2222	1111-2233	Journal	Other_Free_to_Read	N	unique_title_requests	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	Controlled	N	total_investigations	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	Controlled	N	total_requests	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	Controlled	N	unique_item_investigations	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	Controlled	N	unique_item_requests	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	Controlled	N	unique_title_investigations	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	Controlled	N	unique_title_requests	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	OA_Delayed	N	total_investigations	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	OA_Delayed	N	total_requests	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	OA_Delayed	N	unique_item_investigations	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	OA_Delayed	N	unique_item_requests	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	OA_Delayed	N	unique_title_investigations	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	OA_Delayed	N	unique_title_requests	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	OA_Gold_APC	N	total_investigations	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	OA_Gold_APC	N	total_requests	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	OA_Gold_APC	N	unique_item_investigations	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	OA_Gold_APC	N	unique_item_requests	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	OA_Gold_APC	N	unique_title_investigations	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	OA_Gold_APC	N	unique_title_requests	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	Other_Free_to_Read	N	total_investigations	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	Other_Free_to_Read	N	total_requests	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	Other_Free_to_Read	N	unique_item_investigations	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	Other_Free_to_Read	N	unique_item_requests	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	Other_Free_to_Read	N	unique_title_investigations	5	1	1	1	1	1							
+Journal B	Publisher B	isni:222222	PlatformZ		jnrlB	1221-2111	1221-2321	Journal	Other_Free_to_Read	N	unique_title_requests	5	1	1	1	1	1							
+Journal C	Publisher B	isni:222222	PlatformZ		jnrlC	1222-2312	1221-2233	Journal	OA_Gold_Non_APC	N	total_investigations	5	1	1	1	1	1							
+Journal C	Publisher B	isni:222222	PlatformZ		jnrlC	1222-2312	1221-2233	Journal	OA_Gold_Non_APC	N	total_requests	5	1	1	1	1	1							
+Journal C	Publisher B	isni:222222	PlatformZ		jnrlC	1222-2312	1221-2233	Journal	OA_Gold_Non_APC	N	unique_item_investigations	5	1	1	1	1	1							
+Journal C	Publisher B	isni:222222	PlatformZ		jnrlC	1222-2312	1221-2233	Journal	OA_Gold_Non_APC	N	unique_item_requests	5	1	1	1	1	1							
+Journal C	Publisher B	isni:222222	PlatformZ		jnrlC	1222-2312	1221-2233	Journal	OA_Gold_Non_APC	N	unique_title_investigations	5	1	1	1	1	1							
+Journal C	Publisher B	isni:222222	PlatformZ		jnrlC	1222-2312	1221-2233	Journal	OA_Gold_Non_APC	N	unique_title_requests	5	1	1	1	1	1							

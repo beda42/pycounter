@@ -29,3 +29,8 @@ def csv_jr1_report_common_data(request):
 def csv_jr1_r4_report(request):
     return report.parse(os.path.join(os.path.dirname(__file__),
                                      'data', request.param))
+
+@pytest.fixture
+def counter5_jtr1():
+    return report.parse(os.path.join(os.path.dirname(__file__),
+                                     'data', 'JTR1R5.tsv'))
