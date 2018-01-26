@@ -20,12 +20,8 @@ requirements = [
     'six',
     'arrow',
     'click',
+    'lxml',
 ]
-
-if platform.python_implementation() == "PyPy":
-    requirements.append('lxml<=3.4.4')
-else:
-    requirements.append('lxml')
 
 setup(
     name='pycounter',
