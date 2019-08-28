@@ -17,6 +17,7 @@ import six
 from pycounter import sushi5
 import pycounter.constants
 import pycounter.exceptions
+from pycounter.exceptions import SushiException
 from pycounter.helpers import convert_date_run
 import pycounter.report
 
@@ -235,7 +236,13 @@ def raw_to_full(raw_report):
 
     report.metric = pycounter.constants.METRICS.get(report_data["report_type"])
 
-    for item in c_report.Customer.ReportItems:
+    # check that the 'Customer' tag is present - if not, if usually means error in data
+    try:
+        customer_obj = c_report.Customer
+    except AttributeError as e:
+        raise SushiException("No customer tag found in report", raw=raw_report, xml=o_root)
+
+    for item in customer_obj.ReportItems:
         try:
             publisher_name = item.ItemPublisher.text
         except AttributeError:
