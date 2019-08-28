@@ -236,13 +236,18 @@ def raw_to_full(raw_report):
 
     report.metric = pycounter.constants.METRICS.get(report_data["report_type"])
 
-    # check that the 'Customer' tag is present - if not, if usually means error in data
+    # check that the Customer/ReportItems tags are present
+    # - if not, it usually means error in data
     try:
         customer_obj = c_report.Customer
     except AttributeError as e:
-        raise SushiException("No customer tag found in report", raw=raw_report, xml=o_root)
+        raise SushiException("No Customer tag found in report", raw=raw_report, xml=o_root)
+    try:
+        report_items_obj = customer_obj.ReportItems
+    except AttributeError as e:
+        raise SushiException("No ReportItems tag found in report", raw=raw_report, xml=o_root)
 
-    for item in customer_obj.ReportItems:
+    for item in report_items_obj:
         try:
             publisher_name = item.ItemPublisher.text
         except AttributeError:
