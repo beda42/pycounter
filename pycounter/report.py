@@ -82,7 +82,7 @@ class CounterReport(object):
             self.date_run = datetime.date.today()
         else:
             self.date_run = date_run
-        self.year = None
+        self._year = None
         self.section_type = section_type
 
     def __repr__(self):
@@ -92,6 +92,23 @@ class CounterReport(object):
             self.period[0],
             self.period[1],
         )
+
+    @property
+    def year(self):
+        """Year report was issued (deprecated)."""
+        warnings.warn(
+            DeprecationWarning(
+                "CounterReport.year is deprecated."
+                "Reports may span multiple years. "
+                "COUNTER 5 reports will not have a year set."
+            )
+        )
+        return self._year
+
+    @year.setter
+    def year(self, value):
+        """Set year report was issued."""
+        self._year = value
 
     def __iter__(self):
         return iter(self.pubs)
@@ -550,20 +567,15 @@ class CounterPlatform(CounterEresource):
     """a COUNTER platform report line."""
 
     def __init__(
-        self,
-        period=None,
-        metric=None,
-        month_data=None,
-        platform="",
-        publisher="",
+        self, period=None, metric=None, month_data=None, platform="", publisher=""
     ):
         super(CounterPlatform, self).__init__(
             period=period,
             metric=metric,
             month_data=month_data,
-            title='',  # no title for platform report
+            title="",  # no title for platform report
             platform=platform,
-            publisher=publisher
+            publisher=publisher,
         )
         self.isbn = None
 
@@ -760,7 +772,7 @@ def parse_generic(report_reader):
         # these reports do not have line with totals
         six.next(report_reader)
 
-    if report.report_type == "DB2":
+    if report.report_type in ("DB2", "BR3", "JR3"):
         # this report has two lines of totals
         six.next(report_reader)
 
@@ -780,6 +792,7 @@ def _parse_line(line, report, last_col):
     :param last_col: last column number containing data
     :return: an appropriate CounterResource subclass instance
     """
+    # pylint: disable=too-many-locals,too-many-branches,too-many-statements
     issn = None
     eissn = None
     isbn = None
@@ -788,6 +801,7 @@ def _parse_line(line, report, last_col):
     doi = ""
     prop_id = ""
 
+    metric = report.metric
     if report.report_version >= 4:
         if report.report_type.startswith("JR1") or report.report_type == "TR_J1":
             old_line = line
@@ -804,6 +818,16 @@ def _parse_line(line, report, last_col):
             isbn = line[3].strip()
             issn = line[4].strip()
 
+        elif report.report_type in ("BR3", "JR2"):
+            metric = line[7]
+            doi = line[3]
+            prop_id = line[4]
+            line = line[0:3] + line[5:7] + line[9:last_col]
+            eissn = line[4].strip()
+            if report.report_type == "BR3":
+                isbn = line[3].strip()
+            else:
+                issn = line[3].strip()
         # For DB1 and DB2, nothing additional to do here
 
     else:
@@ -823,13 +847,13 @@ def _parse_line(line, report, last_col):
     }
     month_data = []
     curr_month = report.period[0]
-    months_start_idx = 5 if report.report_type != 'PR1' else 4
+    months_start_idx = 5 if report.report_type != "PR1" else 4
     for data in line[months_start_idx:]:
         month_data.append((curr_month, format_stat(data)))
         curr_month = next_month(curr_month)
     if report.report_type.startswith("JR") or report.report_type == "TR_J1":
         return CounterJournal(
-            metric=report.metric,
+            metric=metric,
             month_data=month_data,
             doi=doi,
             issn=issn,
@@ -841,7 +865,7 @@ def _parse_line(line, report, last_col):
         )
     elif report.report_type.startswith("BR"):
         return CounterBook(
-            metric=report.metric,
+            metric=metric,
             month_data=month_data,
             doi=doi,
             issn=issn,
@@ -853,8 +877,13 @@ def _parse_line(line, report, last_col):
         return CounterDatabase(metric=line[3], month_data=month_data, **common_args)
     elif report.report_type == "PR1":
         # there is no title in the PR1 report
-        return CounterPlatform(metric=line[2], month_data=month_data, platform=line[0],
-                               publisher=line[1], period=report.period)
+        return CounterPlatform(
+            metric=line[2],
+            month_data=month_data,
+            platform=line[0],
+            publisher=line[1],
+            period=report.period,
+        )
     raise PycounterException("Should be unreachable")  # pragma: no cover
 
 
@@ -875,6 +904,15 @@ def _get_type_and_version(specifier):
         raise UnknownReportTypeError("No match in line: %s" % specifier)
     if not any(report_type.startswith(x) for x in ("JR", "BR", "DB", "PR1")):
         raise UnknownReportTypeError(report_type)
+
+    if report_version < 4:
+        warnings.warn(
+            DeprecationWarning(
+                "Parsing COUNTER versions before 4 ("
+                "current: {}) will not be supported in "
+                "the next release of pycounter.".format(report_version)
+            )
+        )
 
     return report_type, report_version
 
@@ -897,6 +935,8 @@ def _year_from_header(header, report):
         first_date_col = 5
     elif report.report_type == "PR1" and report.report_version == 4:
         first_date_col = 4
+    elif report.report_type == "JR2":
+        first_date_col = 11
     year = int(header[first_date_col].split("-")[1])
     if year < 100:
         year += 2000

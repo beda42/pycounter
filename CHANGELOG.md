@@ -1,8 +1,13 @@
 # Changelog
-## 2.0 (unreleased)
+## 2.1.0 (unreleased)
+* add support for COUNTER 4 title-level turnaways reports (JR2 and BR3).
 
-* COUNTER 5 support.
+## 2.0.0 (2019-09-13)
+
+* COUNTER 5 support (still a work in progress; see README).
 * Drops support for python 3.4, which is at its end of life.
+* Deprecates parsing of COUNTER 3 reports (which should not have been issued after
+January 2014)
 
 ## 1.1.1 (2019-03-01)
 
