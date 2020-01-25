@@ -10,6 +10,7 @@ NS = {
 METRICS = {
     u"JR1": u"FT Article Requests",
     u"JR1 GOA": u"Gold Open Access Article Requests",
+    u"JR2": u"Access Denied Category",
     u"BR1": u"Book Title Requests",
     u"BR2": u"Book Section Requests",
     u"DB1": [
@@ -138,6 +139,7 @@ HEADER_FIELDS = {
         u"Proprietary Identifier",
         u"Print ISSN",
         u"Online ISSN",
+        u"Access Denied Category",
         u"Reporting Period Total",
         u"Reporting Period HTML",
         u"Reporting Period PDF",
