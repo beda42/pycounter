@@ -184,14 +184,23 @@ def raw_to_full(raw_report):
     :return: a :class:`pycounter.report.CounterReport`
     """
     # pylint: disable=too-many-statements,too-many-branches,too-many-locals
-    try:
-        root = etree.fromstring(raw_report)
-    except etree.XMLSyntaxError:
-        logger.error("XML syntax error: %s", raw_report)
-        raise pycounter.exceptions.SushiException(
-            message="XML syntax error", raw=raw_report
+
+    # try to remove nasty characters from xml
+    raw_converted = "".join(
+        map(
+            lambda ch: ch if ch.isprintable() else " ",
+            raw_report.decode(errors="ignore"),
         )
-    o_root = objectify.fromstring(raw_report)
+    )
+
+    try:
+        root = etree.fromstring(raw_converted)
+    except etree.XMLSyntaxError:
+        logger.error("XML syntax error: %s", raw_converted)
+        raise pycounter.exceptions.SushiException(
+            message="XML syntax error", raw=raw_converted
+        )
+    o_root = objectify.fromstring(raw_converted)
     rep = None
     try:
         rep = o_root.Body[ns("sushicounter", "ReportResponse")]
@@ -200,12 +209,12 @@ def raw_to_full(raw_report):
         try:
             c_report = rep.Report[ns("counter", "Reports")].Report
         except AttributeError:
-            if b"Report Queued" in raw_report:
+            if b"Report Queued" in raw_converted:
                 raise pycounter.exceptions.ServiceBusyError("Report Queued")
             else:
-                logger.error("report not found in XML: %s", raw_report)
+                logger.error("report not found in XML: %s", raw_converted)
                 raise pycounter.exceptions.SushiException(
-                    message="report not found in XML", raw=raw_report, xml=o_root
+                    message="report not found in XML", raw=raw_converted, xml=o_root
                 )
     logger.debug("COUNTER report: %s", etree.tostring(c_report))
     start_date = datetime.datetime.strptime(
@@ -248,7 +257,11 @@ def raw_to_full(raw_report):
 
     # Missing some mandatory field to extract data ->
     # exit right away
-    if not c_report or not hasattr(c_report, "Customer") or not hasattr(c_report.Customer, "ReportItems"):
+    if (
+        not c_report
+        or not hasattr(c_report, "Customer")
+        or not hasattr(c_report.Customer, "ReportItems")
+    ):
         return report
 
     for item in c_report.Customer.ReportItems:
