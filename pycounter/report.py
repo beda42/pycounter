@@ -797,13 +797,17 @@ def parse_generic(report_reader):
         end_date = last_day(convert_date_column(header[last_col - 1]))
         report.period = (start_date, end_date)
 
-    if report.report_type not in ("DB1", "PR1") and report.report_version != 5:
-        # these reports do not have line with totals
-        six.next(report_reader)
+    try:
+        if report.report_type not in ("DB1", "PR1") and report.report_version != 5:
+            # these reports do not have line with totals
+            six.next(report_reader)
 
-    if report.report_type in ("DB2", "BR3", "JR3"):
-        # this report has two lines of totals
-        six.next(report_reader)
+        if report.report_type in ("DB2", "BR3", "JR3"):
+            # this report has two lines of totals
+            six.next(report_reader)
+    except StopIteration:
+        # No record present in the report
+        return report
 
     for line in report_reader:
         if not line:
