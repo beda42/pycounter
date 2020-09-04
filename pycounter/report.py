@@ -4,6 +4,7 @@ from __future__ import absolute_import
 
 import collections
 import datetime
+import itertools
 import logging
 import re
 import warnings
@@ -795,14 +796,20 @@ def parse_generic(report_reader):
         end_date = last_day(convert_date_column(header[last_col - 1]))
         report.period = (start_date, end_date)
 
+    # skip totals
+    total_text = TOTAL_TEXT.get(report.report_type)
     try:
-        if report.report_type not in ("DB1", "PR1") and report.report_version != 5:
-            # these reports do not have line with totals
-            six.next(report_reader)
+        # based on total text we skip first X records
+        if total_text:
+            # other report types are considered not to have
+            # total records
+            while True:
+                peek = six.next(report_reader)
+                if peek[0] != total_text:
+                    break
 
-        if report.report_type in ("DB2", "BR3", "JR3"):
-            # this report has two lines of totals
-            six.next(report_reader)
+            # return first item to generator
+            report_reader = itertools.chain([peek], report_reader)
     except StopIteration:
         # No record present in the report
         return report

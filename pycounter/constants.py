@@ -218,6 +218,7 @@ TOTAL_TEXT = {
     "JR1": u"Total for all journals",
     "JR1 GOA": u"Total for all journals",
     "JR2": u"Total for all journals",
+    "JR3": u"Total for all journals",
     "BR1": u"Total for all titles",
     "BR2": u"Total for all titles",
     "BR3": u"Total for all titles",
