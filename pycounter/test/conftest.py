@@ -116,6 +116,7 @@ def sushi_report_br3():
         "C4BR1.tsv",
         "C4DB1.tsv",
         "C4JR1.csv",
+        "C4JR1GOA.csv",
         "C4BR2.tsv",
         "C4DB2.tsv",
         "C4JR1mul.csv",
