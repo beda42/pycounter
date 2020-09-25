@@ -9,6 +9,7 @@ NS = {
 
 METRICS = {
     u"JR1": u"FT Article Requests",
+    u"JR1a": u"Archive Article Requests",
     u"JR1 GOA": u"Gold Open Access Article Requests",
     u"BR1": u"Book Title Requests",
     u"BR2": u"Book Section Requests",
@@ -96,6 +97,18 @@ REPORT_DESCRIPTIONS = {
 
 HEADER_FIELDS = {
     "JR1": (
+        u"Journal",
+        u"Publisher",
+        u"Platform",
+        u"Journal DOI",
+        u"Proprietary Identifier",
+        u"Print ISSN",
+        u"Online ISSN",
+        u"Reporting Period Total",
+        u"Reporting Period HTML",
+        u"Reporting Period PDF",
+    ),
+    "JR1a": (
         u"Journal",
         u"Publisher",
         u"Platform",
@@ -217,6 +230,7 @@ HEADER_FIELDS = {
 TOTAL_TEXT = {
     "JR1": u"Total for all journals",
     "JR1 GOA": u"Total for all journals",
+    "JR1a": u"Total for all journals",
     "JR2": u"Total for all journals",
     "JR3": u"Total for all journals",
     "BR1": u"Total for all titles",
