@@ -161,6 +161,19 @@ class ParseGOA(unittest.TestCase):
         self.assertEqual(self.report.metric, u"Gold Open Access Article Requests")
 
 
+class ParseJR1(unittest.TestCase):
+    """JR1a Archive Access Report
+    """
+
+    def setUp(self):
+        self.report = report.parse(
+            os.path.join(os.path.dirname(__file__), "data/C4JR1a.csv")
+        )
+
+    def test_metric(self):
+        self.assertEqual(self.report.metric, u"Archive Article Requests")
+
+
 class ParseCounter4Bad(unittest.TestCase):
     """Tests for parsing C4 JR1 with questionable formatting..."""
 
