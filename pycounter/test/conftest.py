@@ -178,6 +178,12 @@ def jr2_report():
     return parsedata("C4JR2.csv")
 
 
+@pytest.fixture
+def mr1_report_tsv():
+    """ Multimedia report 1 """
+    return parsedata("C4MR1.tsv")
+
+
 @pytest.fixture(
     params="""C4BR1.tsv
 C4BR2.tsv
@@ -193,6 +199,7 @@ C4JR1mul.csv
 C4JR1my.csv
 C4JR2.csv
 C4JR2_single_month.csv
+C4MR1.tsv
 PR1.tsv
 simpleBR1.csv
 simpleJR1.csv
