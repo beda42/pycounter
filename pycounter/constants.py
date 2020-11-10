@@ -225,6 +225,12 @@ HEADER_FIELDS = {
         u"Access Denied Category",
         u"Reporting Period Total",
     ),
+    "MR1": (
+        "Collection",
+        "Content Provider",
+        "Platform",
+        "Reporting Period Total",
+    ),
 }
 
 TOTAL_TEXT = {
@@ -237,4 +243,5 @@ TOTAL_TEXT = {
     "BR2": u"Total for all titles",
     "BR3": u"Total for all titles",
     "DB2": u"Total for all databases",
+    "MR1": u"Total for all collections",
 }

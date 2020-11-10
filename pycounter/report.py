@@ -183,7 +183,7 @@ class CounterReport(object):
         output_lines.append([u"Date run:"])
         output_lines.append([self.date_run.strftime("%Y-%m-%d")])
         output_lines.append(self._table_header())
-        if self.report_type in ("JR1", "JR1a", "JR1GOA", "BR1", "BR2", "DB2", "JR2", "BR3"):
+        if self.report_type in ("JR1", "JR1a", "JR1GOA", "BR1", "BR2", "DB2", "JR2", "BR3", "MR1"):
             output_lines.extend(self._totals_lines())
         elif self.report_type.startswith("DB"):
             self._ensure_required_metrics()
@@ -628,6 +628,40 @@ class CounterPlatform(CounterEresource):
         return data_line
 
 
+class CounterMultimedia(CounterEresource):
+    """a COUNTER multimedia report line."""
+
+    def __init__(
+        self, period=None, metric=None, month_data=None, platform="", content_provider="", collection=""
+    ):
+        super(CounterMultimedia, self).__init__(
+            period=period,
+            metric=metric,
+            month_data=month_data,
+            title="",  # no title for multimedia report
+            platform=platform,
+            publisher="",  # no publisher for multimedia report
+        )
+        self.collection = collection
+        self.content_provider = content_provider
+
+    def as_generic(self):
+        """Return data for this line as list of COUNTER report cells."""
+        self._fill_months()
+
+        data_line = [self.collection, self.content_provider, self.platform]
+        total_usage = 0
+        month_data = []
+
+        for data in self:
+            total_usage += data[2]
+            month_data.append(six.text_type(data[2]))
+
+        data_line.append(six.text_type(total_usage))
+        data_line.extend(month_data)
+
+        return data_line
+
 def parse(filename, filetype=None, encoding="utf-8", fallback_encoding="latin-1"):
     """Parse a COUNTER file, first attempting to determine type.
 
@@ -935,6 +969,14 @@ def _parse_line(line, report, last_col):
             publisher=line[1],
             period=report.period,
         )
+    elif report.report_type == "MR1":
+        return CounterMultimedia(
+            period=report.period,
+            month_data=month_data,
+            collection=line[0],
+            content_provider=line[1],
+            platform=line[2],
+        )
     raise PycounterException("Should be unreachable")  # pragma: no cover
 
 
@@ -954,7 +996,7 @@ def _get_type_and_version(specifier):
         report_version = int(rt_match.group(3))
     else:
         raise UnknownReportTypeError("No match in line: %s" % specifier)
-    if not any(report_type.startswith(x) for x in ("JR", "BR", "DB", "PR1")):
+    if not any(report_type.startswith(x) for x in ("JR", "BR", "DB", "PR1", "MR1")):
         raise UnknownReportTypeError(report_type)
 
     if report_version < 4:
