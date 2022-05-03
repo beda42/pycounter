@@ -134,7 +134,7 @@ class ParseBigMultiyear(unittest.TestCase):
 
     def test_period(self):
         self.assertEqual(
-            self.report.period, (datetime.date(2011, 1, 1), datetime.date(2012, 12, 31))
+            self.report.period, (datetime.date(2012, 1, 1), datetime.date(2013, 12, 31))
         )
 
     def test_monthdata_exception(self):
