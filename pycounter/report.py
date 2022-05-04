@@ -822,6 +822,12 @@ def parse_generic(report_reader):
             if col:
                 countable_header.append(col)
         last_col = len(countable_header)
+        # check that the first date column matches the report header and if not, adjust period
+        first_date = convert_date_column(header[_first_date_col(report)])
+        last_date = last_day(convert_date_column(header[last_col - 1]))
+        first_date = first_date if first_date != report.period[0] else report.period[0]
+        last_date = last_date if last_date != report.period[1] else report.period[1]
+        report.period = (first_date, last_date)
     else:
         last_col = 0
         for val in header:
@@ -1031,17 +1037,27 @@ def _year_from_header(header, report):
     NOTE: for multi-year reports, this will be the date of the first month,
     and probably doesn't make sense to talk of a report having a year...
     """
-    first_date_col = 10 if report.report_version == 4 else 5
-    if report.report_type in ("BR1", "BR2") and report.report_version == 4:
-        first_date_col = 8
-    elif report.report_type in ("DB1", "DB2") and report.report_version == 4:
-        first_date_col = 5
-    elif report.report_type == "PR1" and report.report_version == 4:
-        first_date_col = 4
-    elif report.report_type in ("JR2", "BR3"):
-        first_date_col = 9
+    first_date_col = _first_date_col(report)
     year = int(header[first_date_col].split("-")[1])
     if year < 100:
         year += 2000
 
     return year
+
+
+def _first_date_col(report):
+    """
+    Returns the index of the first header column that contains data
+    """
+    first_date_col = 10 if report.report_version == 4 else 5
+    if report.report_type in ("BR1", "BR2") and report.report_version == 4:
+        first_date_col = 8
+    elif report.report_type in ("DB1", "DB2") and report.report_version == 4:
+        first_date_col = 5
+    elif report.report_type in ("PR1", "MR1") and report.report_version == 4:
+        first_date_col = 4
+    elif report.report_type in ("JR2", "BR3"):
+        first_date_col = 9
+    elif report.report_type in ("TR_J1", "TR_J2"):
+        first_date_col = 11
+    return first_date_col
